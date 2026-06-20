@@ -1,0 +1,239 @@
+:root {
+  --bg-main: #10141e;
+  --bg-sidebar: #161d2f;
+  --text-main: #ffffff;
+  --text-muted: #8a919f;
+  --accent-red: #fc4747;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  font-family: 'Outfit', sans-serif;
+  padding: 0;
+}
+
+/* მთავარი კონტეინერის განლაგება */
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 16px;
+}
+
+/* 💻 დესკტოპის ვერსია (Sidebar მარცხნივ) */
+@media (min-width: 1024px) {
+  .app-layout {
+    flex-direction: row;
+    padding: 32px;
+    gap: 36px;
+  }
+}
+
+/* ---------------- NAVBAR / SIDEBAR ---------------- */
+.sidebar {
+  background-color: var(--bg-sidebar);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+}
+
+.nav-icons {
+  display: flex;
+  gap: 24px;
+  list-style: none;
+}
+
+.nav-icons li {
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+}
+
+.nav-icons li:hover, .nav-icons li.active {
+  opacity: 1;
+}
+
+.logo img {
+  width: 25px;
+  height: 20px;
+}
+
+.profile img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid white;
+}
+
+/* ცვლილება დესკტოპზე */
+@media (min-width: 1024px) {
+  .sidebar {
+    flex-direction: column;
+    height: calc(100vh - 64px);
+    width: 96px;
+    padding: 32px 0;
+    margin-bottom: 0;
+    position: sticky;
+    top: 32px;
+  }
+
+  .nav-icons {
+    flex-direction: column;
+    gap: 40px;
+  }
+  
+  .profile img {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* ---------------- MAIN CONTENT & SEARCH ---------------- */
+.main-content {
+  flex: 1;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.search-container input {
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  color: var(--text-main);
+  width: 100%;
+  outline: none;
+}
+
+.search-container input::placeholder {
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
+.page-title {
+  font-size: 20px;
+  font-weight: 300;
+  margin-bottom: 24px;
+  letter-spacing: -0.5px;
+}
+
+@media (min-width: 768px) {
+  .page-title {
+    font-size: 32px;
+  }
+  .search-container input {
+    font-size: 24px;
+  }
+}
+
+/* ---------------- RESPONSIVE GRID ---------------- */
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 📱 მობაილი - 2 სვეტი */
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .movie-grid {
+    grid-template-columns: repeat(3, 1fr); /* 📟 ტაბლეტი - 3 სვეტი */
+    gap: 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .movie-grid {
+    grid-template-columns: repeat(4, 1fr); /* 💻 დესკტოპო - 4 სვეტი */
+    gap: 40px;
+  }
+}
+
+/* ---------------- MOVIE CARD ---------------- */
+.movie-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.thumbnail-container {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+}
+
+.thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bookmark-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: rgba(16, 20, 30, 0.5);
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.bookmark-btn:hover {
+  background-color: white;
+}
+
+.bookmark-btn:hover svg path {
+  stroke: black;
+}
+
+.bookmark-btn.saved svg path {
+  fill: white;
+  stroke: white;
+}
+
+.card-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--text-muted);
+  margin: 8px 0 4px 0;
+}
+
+.meta-dot {
+  width: 3px;
+  height: 3px;
+  background-color: var(--text-muted);
+  border-radius: 50%;
+  opacity: 0.5;
+}
+
+.card-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-main);
+}
+
+@media (min-width: 768px) {
+  .card-meta { font-size: 13px; }
+  .card-title { font-size: 18px; }
+  .bookmark-btn { top: 16px; right: 16px; }
+}
